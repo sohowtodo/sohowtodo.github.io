@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-30T11:01:45.802Z</updated>
+  <updated>2023-12-06T15:22:48.367Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <title>欢迎来到我的博客</title>
     <link href="http://example.com/hello%20world/"/>
     <id>http://example.com/hello%20world/</id>
-    <published>2023-11-29T12:56:10.016Z</published>
-    <updated>2023-11-30T11:01:45.802Z</updated>
+    <published>2023-12-06T15:22:48.367Z</published>
+    <updated>2023-12-06T15:22:48.367Z</updated>
     
-    <content type="html"><![CDATA[<p>这是一个计算机菜鸟的博客，我将在这里分享逆向工程，数据结构的学习笔记，在之后也会分享</p><p>c++,web安全，python的一些学习笔记（画个饼先）。欢迎各位一起交流学习</p><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="我的专业？"><a href="#我的专业？" class="headerlink" title="我的专业？"></a>我的专业？</h3><p>现在是一名大二的机械狗，至于会不会转去计科？我也不知道</p><h3 id="为啥要建博客？"><a href="#为啥要建博客？" class="headerlink" title="为啥要建博客？"></a>为啥要建博客？</h3><p>闲着没事干（bushi）想在这里存放我脑子里微不足道的知识以方便未来的你我，如果没有帮助到你，我只能说sorry了</p><h3 id="欧克，我要说的话就这些，希望你能在我的博客有所收获"><a href="#欧克，我要说的话就这些，希望你能在我的博客有所收获" class="headerlink" title="欧克，我要说的话就这些，希望你能在我的博客有所收获"></a>欧克，我要说的话就这些，希望你能在我的博客有所收获</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <center><img src=""D:\hexo\blog\source\_posts\liuhua.gif"" width = "" height = ""></center>]]></content>
+    <content type="html"><![CDATA[<p>这是一个计算机菜鸟的博客，我将在这里分享逆向工程，数据结构的学习笔记，在之后也会分享</p><p>c++,web安全，python的一些学习笔记（画个饼先）。欢迎各位一起交流学习</p><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="我的专业？"><a href="#我的专业？" class="headerlink" title="我的专业？"></a>我的专业？</h3><p>现在是一名大二的机械狗，至于会不会转去计科？我也不知道</p><h3 id="为啥要建博客？"><a href="#为啥要建博客？" class="headerlink" title="为啥要建博客？"></a>为啥要建博客？</h3><p>闲着没事干（bushi）想在这里存放我脑子里微不足道的知识以方便未来的你我，如果没有帮助到你，我只能说sorry了</p><h3 id="欧克，我要说的话就这些，希望你能在我的博客有所收获"><a href="#欧克，我要说的话就这些，希望你能在我的博客有所收获" class="headerlink" title="欧克，我要说的话就这些，希望你能在我的博客有所收获"></a>欧克，我要说的话就这些，希望你能在我的博客有所收获</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/images/liuhua.gif" alt="liuhua"></p>]]></content>
     
     
       
@@ -35,6 +35,27 @@
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>CTF(Misc)初体验</title>
+    <link href="http://example.com/CTF-Misc-%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
+    <id>http://example.com/CTF-Misc-%E5%88%9D%E4%BD%93%E9%AA%8C/</id>
+    <published>2023-12-06T07:12:52.000Z</published>
+    <updated>2023-12-06T15:19:16.216Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CTF是什么"><a href="#CTF是什么" class="headerlink" title="CTF是什么"></a>CTF是什么</h1><p><u>CTF（Capture The Flag）</u>中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式，2013年全球举办了超过五十场国际性CTF赛事。而DEFCON作为CTF赛制的发源地，DEFCON CTF也成为了目前全球最高技术水平和影响力的CTF竞赛，类似于CTF赛场中的“世界杯” 。</p><span id="more"></span><h1 id="CTF的题目形式"><a href="#CTF的题目形式" class="headerlink" title="CTF的题目形式"></a>CTF的题目形式</h1><ul><li><h2 id="MISC（安全杂项）"><a href="#MISC（安全杂项）" class="headerlink" title="MISC（安全杂项）"></a>MISC（安全杂项）</h2></li></ul><p>全称Miscellaneous。题目涉及流量分析、电子取证、人肉搜索、数据分析、大数据统计等等，覆盖面比较广。我们平时看到的社工类题目；给你一个流量包让你分析的题目；取证分析题目，都属于这类题目。主要考查参赛选手的各种基础综合知识，考察范围比较广。</p><ul><li><h2 id="PPC（编程类）"><a href="#PPC（编程类）" class="headerlink" title="PPC（编程类）"></a><strong>PPC（编程类）</strong></h2></li></ul><p>全称Professionally Program Coder。题目涉及到程序编写、编程算法实现。算法的逆向编写，批量处理等，有时候用编程去处理问题，会方便的多。当然PPC相比ACM来说，还是较为容易的。至于编程语言嘛，推荐使用Python来尝试。这部分主要考察选手的快速编程能力。</p><ul><li><h2 id="REVERSE（逆向）"><a href="#REVERSE（逆向）" class="headerlink" title="REVERSE（逆向）"></a><strong>REVERSE（逆向）</strong></h2></li></ul><p>全称reverse。题目涉及到软件逆向、破解技术等，要求有较强的反汇编、反编译扎实功底。需要掌握汇编，堆栈、寄存器方面的知识。有好的逻辑思维能力。主要考查参赛选手的逆向分析能力。此类题目也是线下比赛的考察重点。</p><ul><li><h2 id="CRYPTO（密码学）"><a href="#CRYPTO（密码学）" class="headerlink" title="CRYPTO（密码学）"></a><strong>CRYPTO（密码学）</strong></h2></li></ul><p>全称Cryptography。题目考察各种加解密技术，包括古典加密技术、现代加密技术甚至出题者自创加密技术。实验吧“角斗场”中，这样的题目汇集的最多。这部分主要考查参赛选手密码学相关知识点。</p><ul><li><h2 id="WEB（web类）"><a href="#WEB（web类）" class="headerlink" title="WEB（web类）"></a><strong>WEB（web类）</strong></h2></li></ul><p>WEB应用在今天越来越广泛，也是CTF夺旗竞赛中的主要题型，题目涉及到常见的Web漏洞，诸如注入、XSS、文件包含、代码审计、上传等漏洞。这些题目都不是简单的注入、上传题目，至少会有一层的安全过滤，需要选手想办法绕过。且Web题目是国内比较多也是大家比较喜欢的题目。因为大多数人开始安全都是从web日站开始的。</p><h1 id="MISC简单示例"><a href="#MISC简单示例" class="headerlink" title="MISC简单示例"></a>MISC简单示例</h1><p>在MISC中，一般会给我们图片或者文件与压缩包，在我做题的过程中，出题者给出了如下一张图片<br><img src="/images/GG_.jpg" alt="GG_"></p><p>而题目的描述为”当培根掉到猪圈里会引起怎样的火花？？？拭目以待吧！！！“似乎有点奇怪，而且图片中间还有一些奇怪的字符。此时我们根据描述，可以去分别看看”培根“与”猪圈“是什么。在浏览器搜索可以知道它们分别指的是<strong>培根密码</strong>与<strong>猪圈密码</strong>。</p><p><img src="/images/1.jpg" alt="1"><br>我们可以发现图上的字符与我们上图的字符有点像，我们可以试着自己翻译或者去在线翻译，得到一串字符”ababbababbbababbabbababbaaaabbbaab“而这串字符又与培根密码有相似之处</p><p><img src="/images/2.jpg" alt="2"><br>此时我们对照翻译就是它的正确明文了（翻译为出来得到”MMXYYD“）。</p><h1 id="MISC图片隐写"><a href="#MISC图片隐写" class="headerlink" title="MISC图片隐写"></a>MISC图片隐写</h1><ul><li><h2 id="常见图片隐写"><a href="#常见图片隐写" class="headerlink" title="常见图片隐写"></a><strong>常见图片隐写</strong></h2></li></ul><h3 id="1隐藏在图片属性里"><a href="#1隐藏在图片属性里" class="headerlink" title="1隐藏在图片属性里"></a>1隐藏在图片属性里</h3><p>这种方式图片隐藏的flag我一般可以右键查看文件属性，来查看属性中有无对应的flag当然也有可能是一串经过加密的字符，我们可以通过其特性来找出相应的加密方法（属性里一般也会附带上经纬度，所以尽量不要发原图暴露自己的信息哦）</p><h3 id="2将压缩包伪装为图片"><a href="#2将压缩包伪装为图片" class="headerlink" title="2将压缩包伪装为图片"></a>2将压缩包伪装为图片</h3><p>一般来说，这种图片看起来与普通图片别无两样，我们可以通过binwalk查看，或者是采用查看压缩包的形式来查看该图片，而flag可能就藏在该图片的某个文件夹之类。</p><h3 id="3藏在图片的字节之中"><a href="#3藏在图片的字节之中" class="headerlink" title="3藏在图片的字节之中"></a>3藏在图片的字节之中</h3><p>这类题我们一般可以将图片放入WinHex或者是010 Editor中来查看而图片常见的文件格式如下表所示</p><table><thead><tr><th align="center">文件格式</th><th align="center">文件头</th><th align="center">文件尾</th></tr></thead><tbody><tr><td align="center">JEPG（jpg）</td><td align="center">FFD8FF</td><td align="center">FF D9</td></tr><tr><td align="center">PNG (png)</td><td align="center">89504E47</td><td align="center">AE 42 60 82</td></tr><tr><td align="center">GIF (gif)</td><td align="center">47494638</td><td align="center">00 3B</td></tr></tbody></table><p>在这里我们以下图为例</p><p><img src="/images/3.jpg" alt="3"></p><p>我们可以先右键查看它的属性<br><img src="/images/4.png" alt="4"></p><p>发现并没有相关解题信息，我们再以压缩包形式打开,也没有发现其他文件。此时我们将图片拖入010 Editor中查看它的文件头与文件尾。</p><p><img src="/images/5.png" alt="5"></p><p><img src="/images/6.png" alt="6"></p><p>我们与上述表格对比，发现在文件尾”FF D9”后本该什么也没有，但这里多出一串字符，而字符中的“CCSUCTF{010_3d1t0r_15_4_g00d_t00l}”就是我们要的答案了</p><ul><li><h2 id="LSB隐写"><a href="#LSB隐写" class="headerlink" title="LSB隐写"></a><strong>LSB隐写</strong></h2></li></ul><p>LSB即为最低有效位（Least Significant Bit，lsb），我们知道，图片中的图像像素一般是由RGB三原色（红绿蓝）组成，每一种颜色占用8位，取值范围为0x00~0xFF，即有256种颜色，一共包含了256的3次方的颜色，即16777216种颜色。而人类的眼睛可以区分约1000万种不同的颜色，这就意味着人类的眼睛无法区分余下的颜色大约有6777216种。</p><p><img src="/images/7.png" alt="7"></p><p>十进制的235表示的是绿色，我们修改了在二进制中的最低位，但是颜色看起来依旧没有变化。我们就可以修改最低位中的信息，实现信息的隐写。</p><p><img src="/images/8.jpg" alt="8"></p><p>而我们在解题过程中用到一款名为“StegSolve”的工具</p><p><img src="/images/9.png" alt="9"></p><p>在该软件我们可以通过给red，green，blue的0通道打勾来查看图片隐藏的信息。我们用下图来做示例</p><p><img src="/images/10.png" alt="10"></p><p>我们将文件导入软件并勾选三色的0通道来找到隐藏信息，最终效果如下</p><p><img src="/images/11.png" alt="11"></p><p>最终我们找到的本题的flag</p><h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>其实这个博客在上周前就已经搭建好了，一直想写点东西，但奈何事情有点多，这几天将CTF题做了一部分终于斗胆写点东西，如果写的太差，还望大佬见谅</p><p>ok收工，看银魂去</p><p><img src="/images/11.gif" alt="11"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;CTF是什么&quot;&gt;&lt;a href=&quot;#CTF是什么&quot; class=&quot;headerlink&quot; title=&quot;CTF是什么&quot;&gt;&lt;/a&gt;CTF是什么&lt;/h1&gt;&lt;p&gt;&lt;u&gt;CTF（Capture The Flag）&lt;/u&gt;中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式，2013年全球举办了超过五十场国际性CTF赛事。而DEFCON作为CTF赛制的发源地，DEFCON CTF也成为了目前全球最高技术水平和影响力的CTF竞赛，类似于CTF赛场中的“世界杯” 。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="MISC" scheme="http://example.com/categories/MISC/"/>
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
     
   </entry>
   
