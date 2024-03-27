@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-12-06T15:22:48.367Z</updated>
+  <updated>2024-03-27T08:53:44.998Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <title>欢迎来到我的博客</title>
     <link href="http://example.com/hello%20world/"/>
     <id>http://example.com/hello%20world/</id>
-    <published>2023-12-06T15:22:48.367Z</published>
-    <updated>2023-12-06T15:22:48.367Z</updated>
+    <published>2024-03-27T08:53:44.998Z</published>
+    <updated>2024-03-27T08:53:44.998Z</updated>
     
-    <content type="html"><![CDATA[<p>这是一个计算机菜鸟的博客，我将在这里分享逆向工程，数据结构的学习笔记，在之后也会分享</p><p>c++,web安全，python的一些学习笔记（画个饼先）。欢迎各位一起交流学习</p><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="我的专业？"><a href="#我的专业？" class="headerlink" title="我的专业？"></a>我的专业？</h3><p>现在是一名大二的机械狗，至于会不会转去计科？我也不知道</p><h3 id="为啥要建博客？"><a href="#为啥要建博客？" class="headerlink" title="为啥要建博客？"></a>为啥要建博客？</h3><p>闲着没事干（bushi）想在这里存放我脑子里微不足道的知识以方便未来的你我，如果没有帮助到你，我只能说sorry了</p><h3 id="欧克，我要说的话就这些，希望你能在我的博客有所收获"><a href="#欧克，我要说的话就这些，希望你能在我的博客有所收获" class="headerlink" title="欧克，我要说的话就这些，希望你能在我的博客有所收获"></a>欧克，我要说的话就这些，希望你能在我的博客有所收获</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/images/liuhua.gif" alt="liuhua"></p>]]></content>
+    <content type="html"><![CDATA[<p>这是一个计算机菜鸟的博客，我将在这里分享逆向工程，数据结构的学习笔记，在之后也会分享</p><p>c++,web安全，python的一些学习笔记（画个饼先）。欢迎各位一起交流学习</p><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="我的专业？"><a href="#我的专业？" class="headerlink" title="我的专业？"></a>我的专业？</h3><p>现在是一名大二的机械狗，至于会不会转去计科？我也不知道(ok也是成功转入计科了)</p><h3 id="为啥要建博客？"><a href="#为啥要建博客？" class="headerlink" title="为啥要建博客？"></a>为啥要建博客？</h3><p>闲着没事干（bushi）想在这里存放我脑子里微不足道的知识以方便未来的你我，如果没有帮助到你，我只能说sorry了</p><h3 id="欧克，我要说的话就这些，希望你能在我的博客有所收获"><a href="#欧克，我要说的话就这些，希望你能在我的博客有所收获" class="headerlink" title="欧克，我要说的话就这些，希望你能在我的博客有所收获"></a>欧克，我要说的话就这些，希望你能在我的博客有所收获</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/images/liuhua.gif" alt="liuhua"></p>]]></content>
     
     
       
