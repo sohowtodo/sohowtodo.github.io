@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/3.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.css" integrity="sha256-vQkngPS8jiHHH0I6ABTZroZk8NPZ7b+MUReOFE9UsXQ=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownBigOut"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="0x01MISC上周第一次参加了正式的ctf比赛，学到了很多东西，特意记录一下自己的wp与复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="帕鲁CTFwp">
+<meta property="og:url" content="http://example.com/wp/index.html">
+<meta property="og:site_name" content="不想丸辣的博客">
+<meta property="og:description" content="0x01MISC上周第一次参加了正式的ctf比赛，学到了很多东西，特意记录一下自己的wp与复现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/wp.assets/j1.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/j2.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/sstv.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/kali.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/323.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/g.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/ezmisc1.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/ezmisc2.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/ezmisc3.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/ezmisc4.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/350.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3502.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3503.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3504.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3505.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3506.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/22.jpg">
+<meta property="og:image" content="http://example.com/images/wp.assets/3507.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/3508.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240422202256.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/a2.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/aa.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420113216946.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420113546772.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/%E5%B8%95%E9%B2%81%E5%B8%95%E9%B2%811.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420114130054.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420114521758.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420114633231.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/image-20240420114715334.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha1.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha2.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha3.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha4.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha5.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha6.png">
+<meta property="og:image" content="http://example.com/images/wp.assets/cha7.png">
+<meta property="article:published_time" content="2024-04-20T05:34:19.256Z">
+<meta property="article:modified_time" content="2024-04-24T11:05:15.396Z">
+<meta property="article:author" content="不想丸辣">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/wp.assets/j1.png">
+
+
+<link rel="canonical" href="http://example.com/wp/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/wp/","path":"wp/","title":"帕鲁CTFwp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>帕鲁CTFwp | 不想丸辣的博客</title>
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<link rel="alternate" href="/atom.xml" title="不想丸辣的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">不想丸辣的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤（bushi）</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01MISC"><span class="nav-number">1.</span> <span class="nav-text">0x01MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%9F"><span class="nav-number">1.1.</span> <span class="nav-text">江</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FM145-8"><span class="nav-number">1.2.</span> <span class="nav-text">FM145.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Misc-%E7%AD%BE%E5%88%B0"><span class="nav-number">1.3.</span> <span class="nav-text">Misc-签到</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ez-misc"><span class="nav-number">1.4.</span> <span class="nav-text">ez_misc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#350x350"><span class="nav-number">1.5.</span> <span class="nav-text">350x350</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02RE"><span class="nav-number">2.</span> <span class="nav-text">0x02RE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Auth-System"><span class="nav-number">2.1.</span> <span class="nav-text">Auth System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%95%E9%B2%81%E8%A2%AB%E7%97%85%E6%AF%92%E6%84%9F%E6%9F%93%E4%BA%86"><span class="nav-number">2.2.</span> <span class="nav-text">帕鲁被病毒感染了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%B6"><span class="nav-number">2.3.</span> <span class="nav-text">茶</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不想丸辣"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">不想丸辣</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sohowtodo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sohowtodo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2717459395@qq.com" title="E-Mail → mailto:2717459395@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+<div id="music163player">
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1900224553&auto=1&height=66"></iframe>
+</div>
+
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="不想丸辣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不想丸辣的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="帕鲁CTFwp | 不想丸辣的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          帕鲁CTFwp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-20 13:34:19" itemprop="dateCreated datePublished" datetime="2024-04-20T13:34:19+08:00">2024-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-24 19:05:15" itemprop="dateModified" datetime="2024-04-24T19:05:15+08:00">2024-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/wp/" itemprop="url" rel="index"><span itemprop="name">wp</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="0x01MISC"><a href="#0x01MISC" class="headerlink" title="0x01MISC"></a>0x01MISC</h1><p>上周第一次参加了正式的ctf比赛，学到了很多东西，特意记录一下自己的wp与复现</p>
+<span id="more"></span>
+
+<h2 id="江"><a href="#江" class="headerlink" title="江"></a>江</h2><p>这一题我们直接将其放至谷歌地图搜索</p>
+<p><img src="/../images/wp.assets/j1.png"></p>
+<p>可以看到显示为武汉江汉路，再看左边的新金珠宝，就可以定位到武汉市新金珠宝江汉路店，再地图上搜索就可有找到具体位置了</p>
+<p><img src="/../images/wp.assets/j2.png"></p>
+<p>这样就可以得到flag：flag{湖北省武汉市江汉二路与江汉路步行街交叉路口}</p>
+<h2 id="FM145-8"><a href="#FM145-8" class="headerlink" title="FM145.8"></a>FM145.8</h2><p>这一题首先去查看频谱仪跟查看是否为音频隐写，都不是这里就想到了另一种方法用声音传输图片，这里我们使用RX sstv来解决这题，在使用是应将声音的输入与输出都转为虚拟声卡也可以用手机的Robot36</p>
+<p><img src="/../images/wp.assets/sstv.png"></p>
+<p>所以可以得到答案:flag{19b4dD77bF3c66f9ic23F5A25Bc314CB}</p>
+<p>另一种解法是使用QSSTV在kali中输入<code>sudo apt-get install qsstv</code></p>
+<p>安装qstv，之后qsstv-&gt;Options-&gt;Configration-&gt;Sound-&gt;from file</p>
+<p><img src="/../images/wp.assets/kali.png"></p>
+<p>但是Qsstv对音频有格式要求必须是wav格式且采样率必须为48000</p>
+<p>而本题的采样率为41400，这里可以使用Audacity去导出48000hz采样率的音频</p>
+<p>再使用Qsstv即会产生图像</p>
+<p><img src="/../images/wp.assets/323.png"></p>
+<h2 id="Misc-签到"><a href="#Misc-签到" class="headerlink" title="Misc-签到"></a>Misc-签到</h2><p>这一题打开是一个文档然后是一堆数字，这里就是将十进制数字的字符串转换成相应的 Unicode 字符串</p>
+<p><img src="/../images/wp.assets/g.png"></p>
+<p>这里写一个python脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;27880 30693 25915 21892 38450 23454 39564 23460 21457 36865 112 108 98 99 116 102 33719 21462 21069 27573 102 108 97 103 20851 27880 79 110 101 45 70 111 120 23433 20840 22242 38431 22238 22797 112 108 98 99 116 102 33719 21462 21518 27573 102 108 97 103&quot;</span></span><br><span class="line">decimals = <span class="built_in">map</span>(<span class="built_in">int</span>, decimal_string.split())</span><br><span class="line"></span><br><span class="line">chinese_chars = <span class="string">&#x27;&#x27;</span>.join([<span class="built_in">chr</span>(decimal) <span class="keyword">for</span> decimal <span class="keyword">in</span> decimals])</span><br><span class="line"><span class="built_in">print</span>(chinese_chars)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最后运行就可以得到我们想要的结果</p>
+<h2 id="ez-misc"><a href="#ez-misc" class="headerlink" title="ez_misc"></a>ez_misc</h2><p>这一题给了一张图片与一个需要密码的压缩包文件</p>
+<p><img src="/../images/wp.assets/ezmisc1.png"></p>
+<p>这里我们用010 Editor打开，在文件末尾发现一提示字符</p>
+<p><img src="/../images/wp.assets/ezmisc2.png"></p>
+<p>我们将后面的空格与点复制出来，但是并不会显现我们可以考虑一下snow隐写，将后面的字符复制粘贴在一个新建文本上</p>
+<p><img src="/../images/wp.assets/ezmisc3.png"></p>
+<p>可以得到压缩包密码Carefree and carefree</p>
+<p><img src="/../images/wp.assets/ezmisc4.png"></p>
+<p>最终得到flag：flag{b220116fc6ca827ecf3cb6c6c06dac26}</p>
+<h2 id="350x350"><a href="#350x350" class="headerlink" title="350x350"></a>350x350</h2><p>这一题给了我们一张图片加有密码的压缩包</p>
+<p><img src="/../images/wp.assets/350.png"></p>
+<p>按惯例我们用010Editor去查看，发现后面缺少结束标志，判断有可能在里面塞了压缩包</p>
+<p><img src="/../images/wp.assets/3502.png"></p>
+<p>我们打开kali利用binwalk工具查看</p>
+<p><img src="/../images/wp.assets/3503.png"></p>
+<p>可以看见里面藏了多个xml文件，用foremost将其分离可以得到一个压缩包文件我们将其以word的方式打开</p>
+<p><img src="/../images/wp.assets/3504.png"></p>
+<p>很显然是隐藏了文字我们将隐藏文字的勾去掉就能显现文字了</p>
+<p><img src="/../images/wp.assets/3505.png"></p>
+<p>把这段文字放到网上搜索显示为64周易，可能为一种加密方式，这里就不用传统的解密方式，解密字典如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">乾:111111 坤:000000 屯:010001 蒙:100010 需:010111 讼:111010 师:000010 比:010000 小畜:110111 履:111011 泰:000111 否:111000</span><br><span class="line">同人:111101 大有:101111 谦:000100 豫:001000 随:011001 蛊:100110 临:000011 观:110000 噬嗑:101001 贲:100101 剥:100000 复:000001</span><br><span class="line">无妄:111001 大畜:100111 颐:100001 大过:011110 坎:010010 离:101101 咸:011100恒:001110遁:111100 大壮:001111</span><br><span class="line">晋:101000 明夷:000101 家人:110101 睽:101011 蹇:010100 解:001010 损:100011 益:110001 夬:011111 姤:111110 萃:011000 升:000110</span><br><span class="line">困:011010 井:010110 革:011101 鼎:101110 震:001001 艮:100100 渐:110100 归妹:001011 丰:001101 旅:101100 巽:110110 兑:011011</span><br><span class="line">涣:110010 节:010011 中孚:110011 小过:001100 既济:010101 未济:101010    阳:1  阴:0</span><br></pre></td></tr></table></figure>
+
+<p>我们这里使用随波逐流工具箱直接解密出密文</p>
+<p><img src="/../images/wp.assets/3506.png"></p>
+<p>我们将密码填入压缩包又得到了一张图片：</p>
+<p><img src="/../images/wp.assets/22.jpg"></p>
+<p>老规矩用010editor打开看一看</p>
+<p><img src="/../images/wp.assets/3507.png"></p>
+<p>依旧没有尾部标志，使用binwalk+foremost可以分离出两张图片</p>
+<p><img src="/../images/wp.assets/3508.png"></p>
+<h1 id="0x02RE"><a href="#0x02RE" class="headerlink" title="0x02RE"></a>0x02RE</h1><h2 id="Auth-System"><a href="#Auth-System" class="headerlink" title="Auth System"></a>Auth System</h2><p>对于这题我们再进行查壳后首先使用x64debug进行调试可以发现有一行直接跳至‘This computer is not authorized’的指令再动态调试后发现他最后都会执行这一条汇编指令，所以我们可以对其修改，使其跳向输出flag的命令行</p>
+<p><img src="/../images/wp.assets/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240422202256.png"></p>
+<p>我们对4016F1这行汇编指令进行修改，填充汇编指令使其跳转至4016FA使其能够输出flag</p>
+<p><img src="/../images/wp.assets/a2.png"></p>
+<p>改完之后我们再调试运行一遍（图片地址由于本人写wp昏头了为错误位置，正确位置为4016FA）</p>
+<p><img src="/../images/wp.assets/aa.png"></p>
+<p>最终可以在终端得到我们的flag：flag{ASCII_ART_IS_FUN}</p>
+<h2 id="帕鲁被病毒感染了"><a href="#帕鲁被病毒感染了" class="headerlink" title="帕鲁被病毒感染了"></a>帕鲁被病毒感染了</h2><p>一进来是一个压缩包加一张png图片，初看这张图片很有可能存在一个高宽隐写，这里我们使用CRC32校验，去爆破出正确的宽高</p>
+<p><img src="/../images/wp.assets/image-20240420113216946.png"></p>
+<p>使用python爆破脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">crcbp = <span class="built_in">open</span>(<span class="string">&quot;D:\paluctf\帕鲁被病毒感染了\帕鲁被病毒攻击了\帕鲁帕鲁.png&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()    <span class="comment">#打开图片</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">        data = crcbp[<span class="number">12</span>:<span class="number">16</span>] + \</span><br><span class="line">            struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i)+struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, j)+crcbp[<span class="number">24</span>:<span class="number">29</span>]</span><br><span class="line">        crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        <span class="keyword">if</span>(crc32 == <span class="number">0x8857b020</span>):    <span class="comment">#图片当前CRC</span></span><br><span class="line">            <span class="built_in">print</span>(i, j)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;hex:&#x27;</span>, <span class="built_in">hex</span>(i), <span class="built_in">hex</span>(j))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>得到正确的宽高</p>
+<p><img src="/../images/wp.assets/image-20240420113546772.png"></p>
+<p>在010修改宽高就可以得到完整的图片</p>
+<p><img src="/../images/wp.assets/%E5%B8%95%E9%B2%81%E5%B8%95%E9%B2%811.png"></p>
+<p>得到压缩包的密码：palubei@2024#01</p>
+<p>打开压缩包之后我们可以发现有三个文件夹加3个文本文件</p>
+<p><img src="/../images/wp.assets/image-20240420114130054.png"></p>
+<p>我们解析manifest.json中的代码发现其实是一个关于docker容器的部署，三个文件夹为layer层</p>
+<p>所以我们逐个分析三个分析  </p>
+<p>在第二个文件夹的lay.tar中找到一个名为cat文件</p>
+<p><img src="/../images/wp.assets/image-20240420114521758.png"></p>
+<p>用010打开cat发现其实一个在Linux的可执行elf文件</p>
+<p><img src="/../images/wp.assets/image-20240420114633231.png"></p>
+<p>再往后翻就翻到了出题人给的flag</p>
+<p><img src="/../images/wp.assets/image-20240420114715334.png"></p>
+<p>最终得到flag：flag{0n3_n00b_ru1n5_0n3_hundr3d_pr05}</p>
+<h2 id="茶"><a href="#茶" class="headerlink" title="茶"></a>茶</h2><p>这一题拿到程序先查壳</p>
+<p><img src="/../images/wp.assets/cha.png"></p>
+<p>可以看见是一个无壳的x64可执行文件，将其放入ida静态分析</p>
+<p><img src="/../images/wp.assets/cha1.png"></p>
+<p>初步分析是将用户输入的字符与内部的字符进行加密比对，如果字符是对的则输出成功提示，这里再用x64dbg动态调试一下，搜素全部字符可以看到提示再试一遍的提示我们再其地方下一个断点</p>
+<p><img src="/../images/wp.assets/cha2.png"></p>
+<p>单步调试运行，看见指针指到”Is_This_TEA?”这一段字符串处，继续单步运行</p>
+<p><img src="/../images/wp.assets/cha3.png"></p>
+<p>之后就会发现”Is_This_TEA?”在寄存器中逐渐变小，直至只剩下“TEA?”可以猜测这串字符的前部分被拿去对比加密</p>
+<p><img src="/../images/wp.assets/cha4.png"></p>
+<p>在”Is_This_TEA?”还有两串字符串</p>
+<p><img src="/../images/wp.assets/cha5.png"></p>
+<p>其中字符串”SGludDogSW1wcm92ZSBvZiBTYWxzYTIw“很像一串base64编码，用在线解密解密一下</p>
+<p><img src="/../images/wp.assets/cha6.png"></p>
+<p>可以看见提示说是Salsa20的改进算法，因此可以想到chacha20算法，正好也符合题目名字（滑稽）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> ChaCha20</span><br><span class="line"></span><br><span class="line">enc_data = <span class="built_in">bytes</span>.fromhex(<span class="string">&quot;f568c48912eed6dc520c7164f44b6378e1d0d3e248914fa8847b405a131f&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">key = <span class="string">b&quot;SGludDogSW1wcm92ZSBvZiBTYWxzYTIw&quot;</span></span><br><span class="line">nonce = <span class="string">b&quot;Is_This_&quot;</span></span><br><span class="line"></span><br><span class="line">cc = ChaCha20.new(key=key, nonce=nonce)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cc.decrypt(enc_data))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/wp.assets/cha7.png" alt="cha7"></p>
+<p>得到flag：flag{But_I_Like_ChaCha20_More}</p>
+<p>结语：因为才结束几天，官方wp还没有陆续放出来，等放出来会陆续更新</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hello%20world/" rel="prev" title="欢迎来到我的博客">
+                  <i class="fa fa-angle-left"></i> 欢迎来到我的博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+<!--
+-->
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">不想丸辣</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/29/2023 22:03:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共3.6k字</span>
+</div>
+
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.umd.js" integrity="sha256-oyhjPiYRWGXaAt+ny/mTMWOnN1GBoZDUQnzzgC7FRI4=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item">
+      <i class='fas fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item">
+      <i class='fas fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
