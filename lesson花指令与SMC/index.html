@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/3.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.css" integrity="sha256-vQkngPS8jiHHH0I6ABTZroZk8NPZ7b+MUReOFE9UsXQ=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownBigOut"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="软件保护措施一般许多软件有很多保护措施，如静态保护（花指令，加密，加壳，混淆），动态保护（反调试，反虚拟机）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="花指令与SMC">
+<meta property="og:url" content="http://example.com/lesson%E8%8A%B1%E6%8C%87%E4%BB%A4%E4%B8%8ESMC/index.html">
+<meta property="og:site_name" content="不想丸辣的博客">
+<meta property="og:description" content="软件保护措施一般许多软件有很多保护措施，如静态保护（花指令，加密，加壳，混淆），动态保护（反调试，反虚拟机）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/lesson/hua.png">
+<meta property="og:image" content="http://example.com/images/lesson/HUA1.png">
+<meta property="og:image" content="http://example.com/images/lesson/hua4.png">
+<meta property="og:image" content="http://example.com/images/lesson/smc2.png">
+<meta property="og:image" content="http://example.com/images/lesson/smc6.png">
+<meta property="article:published_time" content="2024-04-26T09:32:35.739Z">
+<meta property="article:modified_time" content="2024-04-26T11:54:35.946Z">
+<meta property="article:author" content="不想丸辣">
+<meta property="article:tag" content="Re">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/lesson/hua.png">
+
+
+<link rel="canonical" href="http://example.com/lesson%E8%8A%B1%E6%8C%87%E4%BB%A4%E4%B8%8ESMC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/lesson%E8%8A%B1%E6%8C%87%E4%BB%A4%E4%B8%8ESMC/","path":"lesson花指令与SMC/","title":"花指令与SMC"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>花指令与SMC | 不想丸辣的博客</title>
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/injector/main.css" /><link rel="preload" as="style" href="/css/injector/light.css" /><link rel="preload" as="style" href="/css/injector/dark.css" />
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<link rel="alternate" href="/atom.xml" title="不想丸辣的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">不想丸辣的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">天道酬勤（bushi）</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%BF%9D%E6%8A%A4%E6%8E%AA%E6%96%BD"><span class="nav-number">1.</span> <span class="nav-text">软件保护措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%B1%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">花指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">反汇编原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMC%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">SMC技术</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不想丸辣"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">不想丸辣</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sohowtodo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sohowtodo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2717459395@qq.com" title="E-Mail → mailto:2717459395@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+<div id="music163player">
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1900224553&auto=1&height=66"></iframe>
+</div>
+
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/lesson%E8%8A%B1%E6%8C%87%E4%BB%A4%E4%B8%8ESMC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="不想丸辣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不想丸辣的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="花指令与SMC | 不想丸辣的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          花指令与SMC
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-26 17:32:35 / 修改时间：19:54:35" itemprop="dateCreated datePublished" datetime="2024-04-26T17:32:35+08:00">2024-04-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="软件保护措施"><a href="#软件保护措施" class="headerlink" title="软件保护措施"></a>软件保护措施</h2><p>一般许多软件有很多保护措施，如静态保护（花指令，加密，加壳，混淆），动态保护（反调试，反虚拟机）</p>
+<span id="more"></span>
+
+<h2 id="花指令"><a href="#花指令" class="headerlink" title="花指令"></a>花指令</h2><h3 id="反汇编原理"><a href="#反汇编原理" class="headerlink" title="反汇编原理"></a>反汇编原理</h3><p>1，线性扫描算法</p>
+<p>2，递归行进算法</p>
+<table>
+<thead>
+<tr>
+<th align="center">工具</th>
+<th align="center">反汇编算法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">OllyDbg</td>
+<td align="center">线性扫描算法&#x2F;递归行进算法(按住“Ctrl +A”组合键时)</td>
+</tr>
+<tr>
+<td align="center">SoftICe</td>
+<td align="center">线性扫描算法</td>
+</tr>
+<tr>
+<td align="center">WinDBG</td>
+<td align="center">线性扫描算法</td>
+</tr>
+<tr>
+<td align="center">W32Dasm</td>
+<td align="center">线性扫描算法</td>
+</tr>
+<tr>
+<td align="center">IDA pro</td>
+<td align="center">递归行进算法</td>
+</tr>
+</tbody></table>
+<p>​                                                                                                     常见反汇编工具所使用的反汇编算法</p>
+<p>而在一些指令中加入一个字符通常会引起错误的反汇编</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">__asm &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		push eax</span><br><span class="line">		xor eax, eax</span><br><span class="line">		jmp label1</span><br><span class="line">		__emit <span class="number">0xe9</span></span><br><span class="line">label1:</span><br><span class="line">		pop eax</span><br><span class="line">		mov ebx, <span class="number">1</span></span><br><span class="line">		add eax, ebx</span><br><span class="line">		ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>_emit是直接插入一个数的写法，而在汇编指令中，e9常常会被认为是jmp的前缀，而反汇编遇到时会将e9以及后面4个字节一共五个字节当作jmp指令处理</p>
+<p>而在这个新插入的字节却不会影响原本的程序运行，因为jmp label1为无条件跳转，所以cpu永远不会执行到__emit 0xe9但却会影响到反汇编，这也起到了保护程序正常运行的目的</p>
+<p>在反汇编窗口可以看见反编译器将其错误的解析为jmp指令</p>
+<p><img src="/../images/lesson/hua.png"></p>
+<p>而对于这种情况，使用递归行进算法的ida可以完美识别</p>
+<p><img src="/../images/lesson/HUA1.png"></p>
+<p>可以看到ida成功的将e9识别为数据</p>
+<p>然而这只是最简单的花指令，要骗过ida，因为ida是根据分支跳转，可以把jmp替换为两条互补的条件跳转指令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	__asm &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		push eax</span><br><span class="line">        xor eax,eax</span><br><span class="line">		mov eax,<span class="number">1</span></span><br><span class="line">	    jz label1</span><br><span class="line">		jnz label1</span><br><span class="line">		__emit <span class="number">0xe9</span></span><br><span class="line">label1:</span><br><span class="line">		pop eax</span><br><span class="line">		mov ebx, <span class="number">1</span></span><br><span class="line">		add eax, ebx</span><br><span class="line">		ret</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改完之后我们再放入ida中看看</p>
+<p><img src="/../images/lesson/hua4.png"></p>
+<p>可以看到这次ida没有处理成功，因为ida是根据控制指令，去到不同的分支，在不同的分支中再采用线性算法，当遇到jz，jnz时，两种情况ida都需要处理，当ida不跳转时，并紧接着来到了E9的位置并将E9当作jmp指令</p>
+<h2 id="SMC技术"><a href="#SMC技术" class="headerlink" title="SMC技术"></a>SMC技术</h2><p>SMC全程<strong>Self Modifying Code</strong>技术，代码自修改技术，也就是说，在一段代码执行之前，可以对其进行修改，一般用来加密核心功能逻辑，也是加壳技术的基础</p>
+<p><img src="/../images/lesson/smc2.png"></p>
+<p>比如有如下两段代码一段为初始化代码而另一段为加密后代码，用ida打开蓝色代码可以正常看到，而红色部分在ida中则是加密后的16进制数据</p>
+<p>如如下一段代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">__declspec(naked)</span><br><span class="line"><span class="type">void</span> <span class="title function_">important_fun</span><span class="params">()</span> &#123;</span><br><span class="line">	__asm &#123;</span><br><span class="line"></span><br><span class="line">		mov eax, <span class="number">0x76D7AE40</span></span><br><span class="line">		push <span class="number">0</span></span><br><span class="line">		push <span class="number">0x6E617579</span></span><br><span class="line">		push <span class="number">0x6E617578</span></span><br><span class="line">		mov ebx, esp</span><br><span class="line"></span><br><span class="line">		push <span class="number">0</span></span><br><span class="line">		push ebx</span><br><span class="line">		push ebx</span><br><span class="line">		push <span class="number">0</span></span><br><span class="line">		call eax</span><br><span class="line">		add esp, <span class="number">0x0C</span></span><br><span class="line"></span><br><span class="line">		ret</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">important_fun2</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;hello, world!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">encrypt_fun</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> encryped_code[<span class="number">32</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span>* ptr = (<span class="type">unsigned</span> <span class="type">char</span>*)important_fun;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; i++) &#123;</span><br><span class="line">		encryped_code[i] = ptr[i] ^ <span class="number">0x11</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;0x%02X, &quot;</span>, encryped_code[i]);</span><br><span class="line">		<span class="keyword">if</span> ((i + <span class="number">1</span>) % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n======================================\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;0x%02X, &quot;</span>, ptr[i]);</span><br><span class="line">		<span class="keyword">if</span> ((i + <span class="number">1</span>) % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt_fun</span><span class="params">(PVOID address)</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span>* ptr = (<span class="type">unsigned</span> <span class="type">char</span>*)address;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; i++) &#123;</span><br><span class="line">		ptr[i] = ptr[i] ^ <span class="number">0x11</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;0x%02X, &quot;</span>, ptr[i]);</span><br><span class="line">		<span class="keyword">if</span> ((i + <span class="number">1</span>) % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> g_code[] = &#123;</span><br><span class="line"><span class="number">0xF8</span>, <span class="number">0x38</span>, <span class="number">0x12</span>, <span class="number">0x11</span>, <span class="number">0x11</span>, <span class="number">0xF8</span>, <span class="number">0x93</span>, <span class="number">0x39</span>,</span><br><span class="line"><span class="number">0x11</span>, <span class="number">0x11</span>, <span class="number">0xF8</span>, <span class="number">0x48</span>, <span class="number">0x39</span>, <span class="number">0x11</span>, <span class="number">0x11</span>, <span class="number">0xF8</span>,</span><br><span class="line"><span class="number">0x17</span>, <span class="number">0x39</span>, <span class="number">0x11</span>, <span class="number">0x11</span>, <span class="number">0xF8</span>, <span class="number">0xB4</span>, <span class="number">0x12</span>, <span class="number">0x11</span>,</span><br><span class="line"><span class="number">0x11</span>, <span class="number">0xF8</span>, <span class="number">0xAD</span>, <span class="number">0x16</span>, <span class="number">0x11</span>, <span class="number">0x11</span>, <span class="number">0xF8</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">smc_test</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">	PVOID codePage = VirtualAlloc(<span class="literal">NULL</span>, <span class="number">4096</span>, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">	<span class="keyword">if</span> (codePage) &#123;</span><br><span class="line">		ZeroMemory(codePage, <span class="number">4096</span>);</span><br><span class="line">		<span class="built_in">memcpy</span>(codePage, g_code, <span class="keyword">sizeof</span>(g_code));</span><br><span class="line">		decrypt_fun(codePage);</span><br><span class="line"></span><br><span class="line">		__asm &#123;</span><br><span class="line">			call codePage</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">	MessageBoxA(<span class="literal">NULL</span>, <span class="string">&quot;start&quot;</span>, <span class="string">&quot;start&quot;</span>, MB_OK);</span><br><span class="line">	important_fun();</span><br><span class="line">	<span class="comment">//encrypt_fun();</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//smc_test();</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//important_fun2();</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中有一个函数encrypt_fun()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">encrypt_fun</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> encryped_code[<span class="number">32</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span>* ptr = (<span class="type">unsigned</span> <span class="type">char</span>*)important_fun;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; i++) &#123;</span><br><span class="line">		encryped_code[i] = ptr[i] ^ <span class="number">0x11</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;0x%02X, &quot;</span>, encryped_code[i]);</span><br><span class="line">		<span class="keyword">if</span> ((i + <span class="number">1</span>) % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这一个函数可以对important_fun进行一个加密操作</p>
+<p>运行之后</p>
+<p><img src="/../images/lesson/smc6.png"></p>
+<p>上面为加密后的字节码，下面为加密前的字节码，而函数smc_test()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">smc_test</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">	PVOID codePage = VirtualAlloc(<span class="literal">NULL</span>, <span class="number">4096</span>, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">	<span class="keyword">if</span> (codePage) &#123;</span><br><span class="line">		ZeroMemory(codePage, <span class="number">4096</span>);</span><br><span class="line">		<span class="built_in">memcpy</span>(codePage, g_code, <span class="keyword">sizeof</span>(g_code));</span><br><span class="line">		decrypt_fun(codePage);</span><br><span class="line"></span><br><span class="line">		__asm &#123;</span><br><span class="line">			call codePage</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这段函数通过<strong>VirtualAlloc</strong>分配了一段内存，会将加密的这段指令拷贝至内存中，接着利用decrypt_fun函数进行一个解密工作，再通过call指令直接调用这段代码</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Re/" rel="tag"># Re</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hello%20world/" rel="prev" title="欢迎来到我的博客">
+                  <i class="fa fa-angle-left"></i> 欢迎来到我的博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/wp/" rel="next" title="帕鲁CTFwp">
+                  帕鲁CTFwp <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+<!--
+-->
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">不想丸辣</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/29/2023 22:03:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共8.7k字</span>
+</div>
+
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.umd.js" integrity="sha256-oyhjPiYRWGXaAt+ny/mTMWOnN1GBoZDUQnzzgC7FRI4=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div id="moon-menu-item-back2bottom" class="moon-menu-item">
+      <i class='fas fa-chevron-down'></i>    </div>
+    
+    <div id="moon-menu-item-back2top" class="moon-menu-item">
+      <i class='fas fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
